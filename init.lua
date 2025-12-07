@@ -2,6 +2,7 @@
 
 
 
+
 -----------------------------------------------------------
 --  Inicialização do Lazy.nvim
 -----------------------------------------------------------
@@ -24,14 +25,14 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
   ---------------------------------------------------------
-  -- Tema Tokyonight
+  -- Tema Tokyonight (modo claro)
   ---------------------------------------------------------
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight-day]])
     end
   },
 
@@ -43,7 +44,7 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
-        options = { theme = "tokyonight" }
+        options = { theme = "tokyonight-day" }
       })
     end
   },
@@ -89,13 +90,13 @@ vim.opt.number = true                -- número de linha
 vim.opt.relativenumber = false        -- números relativos
 vim.opt.cursorline = true            -- destaca linha atual
 vim.opt.termguicolors = true         -- cores 24-bit
-vim.opt.signcolumn = "yes"           -- coluna fixa para lsp/git
-vim.opt.wrap = false                 -- não quebrar linhas longas
+vim.opt.signcolumn = "yes"           -- coluna do lado
+vim.opt.wrap = false                 -- não quebrar linhas
 vim.opt.scrolloff = 8                -- margem vertical
 vim.opt.sidescrolloff = 8            -- margem horizontal
-vim.opt.expandtab = true             -- usa espaços no lugar de tabs
-vim.opt.shiftwidth = 2               -- tamanho da indentação
-vim.opt.tabstop = 2                  -- tamanho do TAB
+vim.opt.expandtab = true             -- usa espaços
+vim.opt.shiftwidth = 2               -- indentação
+vim.opt.tabstop = 2                  -- tab = 2 espaços
 vim.opt.clipboard = "unnamedplus"    -- usa clipboard do sistema
 vim.g.mapleader = " "                -- líder = espaço
 
@@ -117,4 +118,27 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 
 -- Fechar buffer
 vim.keymap.set("n", "<leader>q", ":q<CR>")
+
+-----------------------------------------------------------
+-- Atalhos do Telescope no padrão Space
+-----------------------------------------------------------
+
+vim.keymap.set("n", "<leader>ff", function()
+  require("telescope.builtin").find_files()
+end, { desc = "Buscar arquivos" })
+
+vim.keymap.set("n", "<leader>fg", function()
+  require("telescope.builtin").live_grep()
+end, { desc = "Buscar texto" })
+
+vim.keymap.set("n", "<leader>fb", function()
+  require("telescope.builtin").buffers()
+end, { desc = "Listar buffers" })
+
+vim.keymap.set("n", "<leader>fh", function()
+  require("telescope.builtin").help_tags()
+end, { desc = "Ajuda" })
+
+
+
 
