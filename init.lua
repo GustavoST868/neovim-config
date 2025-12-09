@@ -2,7 +2,6 @@
 
 
 
-
 -----------------------------------------------------------
 --  Inicialização do Lazy.nvim
 -----------------------------------------------------------
@@ -25,14 +24,15 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
   ---------------------------------------------------------
-  -- Tema Tokyonight (modo claro)
+  -- Tema Gruvbox (escuro padrão)
   ---------------------------------------------------------
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
+    "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight-day]])
+      vim.o.background = "dark" -- garante o modo escuro
+      require("gruvbox").setup({})
+      vim.cmd([[colorscheme gruvbox]])
     end
   },
 
@@ -44,7 +44,7 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
-        options = { theme = "tokyonight-day" }
+        options = { theme = "gruvbox" }
       })
     end
   },
@@ -61,7 +61,7 @@ require("lazy").setup({
   },
 
   ---------------------------------------------------------
-  -- Treesitter (sintaxe turbinada)
+  -- Treesitter (sintaxe avançada)
   ---------------------------------------------------------
   {
     "nvim-treesitter/nvim-treesitter",
@@ -75,7 +75,7 @@ require("lazy").setup({
   },
 
   ---------------------------------------------------------
-  -- Telescope (busca moderna)
+  -- Telescope (buscas modernas)
   ---------------------------------------------------------
   {
     "nvim-telescope/telescope.nvim",
@@ -84,21 +84,21 @@ require("lazy").setup({
 })
 
 -----------------------------------------------------------
---  Configurações gerais de editor
+--  Configurações gerais do editor
 -----------------------------------------------------------
-vim.opt.number = true                -- número de linha
-vim.opt.relativenumber = false        -- números relativos
-vim.opt.cursorline = true            -- destaca linha atual
-vim.opt.termguicolors = true         -- cores 24-bit
-vim.opt.signcolumn = "yes"           -- coluna do lado
-vim.opt.wrap = false                 -- não quebrar linhas
-vim.opt.scrolloff = 8                -- margem vertical
-vim.opt.sidescrolloff = 8            -- margem horizontal
-vim.opt.expandtab = true             -- usa espaços
-vim.opt.shiftwidth = 2               -- indentação
-vim.opt.tabstop = 2                  -- tab = 2 espaços
-vim.opt.clipboard = "unnamedplus"    -- usa clipboard do sistema
-vim.g.mapleader = " "                -- líder = espaço
+vim.opt.number = true                
+vim.opt.relativenumber = false       
+vim.opt.cursorline = true            
+vim.opt.termguicolors = true         
+vim.opt.signcolumn = "yes"           
+vim.opt.wrap = false                 
+vim.opt.scrolloff = 8                
+vim.opt.sidescrolloff = 8            
+vim.opt.expandtab = true             
+vim.opt.shiftwidth = 2               
+vim.opt.tabstop = 2                  
+vim.opt.clipboard = "unnamedplus"    
+vim.g.mapleader = " "                
 
 -----------------------------------------------------------
 --  Keymaps úteis
@@ -120,7 +120,7 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 
 -----------------------------------------------------------
--- Atalhos do Telescope no padrão Space
+-- Atalhos do Telescope usando <leader>
 -----------------------------------------------------------
 
 vim.keymap.set("n", "<leader>ff", function()
@@ -138,6 +138,9 @@ end, { desc = "Listar buffers" })
 vim.keymap.set("n", "<leader>fh", function()
   require("telescope.builtin").help_tags()
 end, { desc = "Ajuda" })
+
+
+
 
 
 
